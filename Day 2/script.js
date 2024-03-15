@@ -1,3 +1,6 @@
+//getting HTML tags
+const get_seconds_div = document.querySelector('.clock .second-hand');
+
 //get real time, and update the clock hands accordingly
 const get_date = () => {
   const now =new Date()
@@ -23,6 +26,11 @@ const current_seconds = get_seconds(current_date);
 
 const seconds_in_degrees = convert_seconds_to_degress(current_seconds);
 
-console.log(current_seconds);
-console.log(seconds_in_degrees);
+//stlying - for moving the hands on the clock
+const move_seconds_hand = (seconds_div,degrees) => {
+  seconds_div.style.transform = `rotate(${degrees}deg)`;
+}
+
+console.log(get_seconds_div);
+move_seconds_hand(get_seconds_div,seconds_in_degrees);
 
