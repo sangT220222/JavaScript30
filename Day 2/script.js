@@ -8,12 +8,21 @@ const get_hour = (date) => { return date.getHours() }
 const get_minutes = (date) => { return date.getMinutes() }
 const get_seconds = (date) => { return date.getSeconds() }
 
+//convert seconds to degrees so that it relects on the clock
+const convert_seconds_to_degress = (seconds) => {
+  //There are 360 degrees in a circle.
+  //each second = 360/60 of a circle => 6 degrees
+  return seconds * (360/60)
+}
 
 const current_date = get_date();
+
 const current_hour = get_hour(current_date);
 const current_minutes = get_minutes(current_date);
 const current_seconds = get_seconds(current_date);
 
-console.log(current_hour);
-console.log(current_minutes);
+const seconds_in_degrees = convert_seconds_to_degress(current_seconds);
+
 console.log(current_seconds);
+console.log(seconds_in_degrees);
+
