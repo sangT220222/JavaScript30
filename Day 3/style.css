@@ -1,3 +1,10 @@
+/* Defining CSS variables - with default value(s) */
+:root{
+    --base : #00ff00;
+    --spacing: 10px;
+    --blur: 0px;
+}
+
 body {
     text-align: center;
     background: #193549;
@@ -5,12 +12,23 @@ body {
     font-family: 'helvetica neue', sans-serif;
     font-weight: 100;
     font-size: 50px;
-  }
+}
 
-  .controls {
-    margin-bottom: 50px;
-  }
+.controls {
+margin-bottom: 50px;
+}
 
-  input {
-    width: 100px;
-  }
+input {
+width: 100px;
+}
+
+img {
+    /* below is how you would use a css variable as a value to a CSS property */
+    padding: var(--spacing);
+    background: var(--base);
+    filter: blur(var(--blur));
+}
+
+.hl {
+    color:var(--base);
+}
