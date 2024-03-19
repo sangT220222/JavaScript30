@@ -59,13 +59,21 @@ fetch(endpoint)
 function find_matches (words_match,results)
 {
     const words_match_lower = words_match.toLowerCase();
-    return results.filter(result => result.city.toLowerCase().includes(words_match_lower));
+    return results.filter(result => result.city.toLowerCase().includes(words_match_lower) || result.state.toLowerCase().includes(words_match_lower));
 }
 
 function display_matches()
 {
-    const matched_arr =find_matches(this.value,city_arr);
-    console.log(matched_arr);
+    const matched_arr = find_matches(this.value,city_arr);
+    const content = matched_arr.map(place => {
+        return `
+            <li>
+                <span class = 'name'> ${place.city},${place.state} </span>
+                <span class = 'rank'> Popularity: ${place.rank} </span>
+            </li>
+        `
+    }).join('');
+    suggest.innerHTML = content;
 }
 
 const search_bar = document.querySelector('.search');
