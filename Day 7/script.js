@@ -34,5 +34,10 @@ console.log(check_ID);
 // Find the comment with this ID
 // delete the comment with the ID of 823423
 const get_index = comments.findIndex(comment => comment.id === 823423);
-comments.splice(get_index,1); //first argument is position you want to delete from, second is how many you want to remove from the index you put it as first parameter in the bracket
+// comments.splice(get_index,1); //first argument is position you want to delete from, second is how many you want to remove from the index you put it as first parameter in the bracket
 // console.log(comments);
+//below way will not alter our original comments array, whcih is a better practice 
+const new_comments = [
+  ...comments.splice(0,get_index),
+  ...comments.splice(get_index+1)
+];
