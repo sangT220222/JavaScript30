@@ -5,13 +5,6 @@ const progress = document.querySelector('.progress');
 const progress_bar = document.querySelector('.progress__filled');
 const toggle = document.querySelector('.toggle');
 const slider = document.querySelectorAll('.player__slider');
-const player_btn = document.querySelectorAll('.player__butto// Get elements 
-const vid_player = document.querySelector('.player');
-const video = document.querySelector('.viewer');
-const progress = document.querySelector('.progress');
-const progress_bar = document.querySelector('.progress__filled');
-const toggle = document.querySelector('.toggle');
-const slider = document.querySelectorAll('.player__slider');
 const player_btn = document.querySelectorAll('.player__button')
 
 // console.log(player_btn);
@@ -37,42 +30,33 @@ function skipping(){
   // console.log('skip');
   // console.log(typeof(this.dataset.skip));
   // this.dataset.skip is a string, hence parseFloat is used
-  video.currentTime += parseFloat(this.dataset.skip);
+  video.currentTime += parseFloat(this.dataset.skip)
 }
+
+function play_slider(){
+  video[this.name] = this.value; //updating the value of the respective play_slider tags
+}
+
+function video_progress(){
+  //update in % as we will be changing the flex-basis property in .progress__filled 
+  //0% = start, 100% = finish
+  const percent = (video.currentTime/video.duration)*100;
+  // console.log(percent);
+  progress_bar.style.flexBasis = `${percent}%`;}
 
 //Interactivity - event listeners
 video.addEventListener('click',toggle_play);
 video.addEventListener('play',button_update); //double check the play and pause 
 video.addEventListener('pause',button_update);
+video.addEventListener('timeupdate',video_progress); //continuously monitor the progress of the video playback and update the progress bar accordingly.
 
 toggle.addEventListener('click',toggle_play);
 
 //as player_btn is an array due to querySelectorAll
 player_btn.forEach(btn => btn.addEventListener('click',skipping));
 
-n')
+slider.forEach(range => range.addEventListener('click',play_slider));
 
-// console.log(player_btn);
+progress.addEventListener('click',video_progress);
 
-
-//functions
-function toggle_play(){
-  const status = video.paused ? 'play' : 'pause'; //if video.paused() -> video.play else video.pause()
-  video[status](); //this is a neat wat of saying video.play() or video.pause()
-}
-
-function button_update(){
-  // console.log(this);
-  const icon = this.paused ? '►' : '❚ ❚'; //video html tag contains paused() function
-  // console.log(this);
-  // console.log(icon);
-  toggle.textContent = icon;
-}
-
-//Interactivity - event listeners
-video.addEventListener('click',toggle_play);
-video.addEventListener('play',button_update); //double check the play and pause 
-video.addEventListener('pause',button_update);
-
-toggle.addEventListener('click',toggle_play);
 
