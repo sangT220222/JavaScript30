@@ -44,11 +44,20 @@ function video_progress(){
   // console.log(percent);
   progress_bar.style.flexBasis = `${percent}%`;}
 
+
+function scrub_progress_bar(e){
+  // console.log(e) //we want to use e.offsetX as this tells where the position it was clicked on
+  // calculates the time position within a video corresponding to a mouse click event on a progress bar
+  const update_time = parseFloat(e.offsetX/progress.offsetWidth * video.duration);
+  video.currentTime = update_time;
+  console.log(update_time);
+}
+
 //Interactivity - event listeners
 video.addEventListener('click',toggle_play);
 video.addEventListener('play',button_update); //double check the play and pause 
 video.addEventListener('pause',button_update);
-video.addEventListener('timeupdate',video_progress); //continuously monitor the progress of the video playback and update the progress bar accordingly.
+video.addEventListener('timeupdate',video_progress); //this time update will continuously monitor the progress of the video playback and update the progress bar accordingly.
 
 toggle.addEventListener('click',toggle_play);
 
@@ -57,6 +66,12 @@ player_btn.forEach(btn => btn.addEventListener('click',skipping));
 
 slider.forEach(range => range.addEventListener('click',play_slider));
 
+
+let mousedown = false;
 progress.addEventListener('click',video_progress);
+progress.addEventListener('click',scrub_progress_bar);
 
-
+//line 75, the mousedown has to be true and the scrup_progress_bar with the relative event will be called
+progress.addEventListener('mousemove', (e) => mousedown && scrub_progress_bar(e));
+progress.addEventListener('mousedown', () => mousedown = true);
+progress.addEventListener('mouseup', () => mousedown = false);
