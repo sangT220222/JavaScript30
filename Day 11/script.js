@@ -16,5 +16,18 @@ function toggle_play(){
   video[status](); //this is a neat wat of saying video.play() or video.pause()
 }
 
+function button_update(){
+  // console.log(this);
+  const icon = this.paused ? '►' : '❚ ❚'; //video html tag contains paused() function
+  // console.log(this);
+  // console.log(icon);
+  toggle.textContent = icon;
+}
+
 //Interactivity - event listeners
 video.addEventListener('click',toggle_play);
+video.addEventListener('play',button_update); //double check the play and pause 
+video.addEventListener('pause',button_update);
+
+toggle.addEventListener('click',toggle_play);
+
